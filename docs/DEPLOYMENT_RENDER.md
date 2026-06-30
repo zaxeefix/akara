@@ -10,6 +10,8 @@ Use a Render Web Service for the Express backend.
 npm install && npx prisma generate && npm run build:api
 ```
 
+The backend TypeScript compiler and backend type definitions are production dependencies so Render can build the API even when development dependencies are omitted.
+
 ## Start Command
 
 ```bash
