@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   },
   description: "Digital marketplace for local Akara, Pap, and street food vendors in Nigeria.",
   applicationName: "AkaraConnect",
+  icons: {
+    icon: "/brand/akara-logo.png",
+    apple: "/brand/akara-logo.png"
+  },
   openGraph: {
     title: "AkaraConnect",
     description: "Find trusted local food vendors across Nigeria.",

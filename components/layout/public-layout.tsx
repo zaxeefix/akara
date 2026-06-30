@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
@@ -17,7 +18,17 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center">
           <div className="flex items-center justify-between gap-3">
-            <Link href="/" className="text-xl font-black text-primary">AkaraConnect</Link>
+            <Link href="/" className="flex items-center gap-2" aria-label="AkaraConnect home">
+              <Image
+                src="/brand/akara-logo.png"
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-full object-cover ring-2 ring-primary/15"
+                priority
+              />
+              <span className="text-xl font-black text-primary">AkaraConnect</span>
+            </Link>
             <div className="flex items-center gap-2 lg:hidden">
               <LanguageSwitcher />
             </div>

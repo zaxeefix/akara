@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PublicLayout } from "@/components/layout/public-layout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,8 +23,19 @@ export default function LandingPage() {
               <Link href="/vendor/onboarding"><Button variant="secondary">Become a vendor</Button></Link>
             </div>
           </div>
-          <Card className="bg-white/95 text-ink">
-            <h2 className="text-xl font-black">Nearby breakfast picks</h2>
+          <Card className="overflow-hidden bg-white/95 p-0 text-ink">
+            <div className="relative aspect-square w-full bg-white">
+              <Image
+                src="/brand/akara-logo.png"
+                alt="AkaraConnect marketplace logo showing akara, pap, local vendors, maps, orders, delivery, and trusted reviews"
+                fill
+                sizes="(min-width: 1024px) 38vw, 92vw"
+                className="object-contain p-4"
+                priority
+              />
+            </div>
+            <div className="border-t border-slate-200 p-5">
+              <h2 className="text-xl font-black">Nearby breakfast picks</h2>
             <div className="mt-4 grid gap-3">
               {demoVendors.slice(0, 2).map((vendor) => (
                 <div className="rounded-card bg-slate-100 p-3" key={vendor.id}>
@@ -31,6 +43,7 @@ export default function LandingPage() {
                   <p className="text-sm text-slate-600">{vendor.distance} - {vendor.categories?.join(", ")}</p>
                 </div>
               ))}
+            </div>
             </div>
           </Card>
         </div>

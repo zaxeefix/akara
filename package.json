@@ -2,7 +2,7 @@
   "name": "akaraconnect",
   "version": "0.5.0",
   "description": "AkaraConnect marketplace frontend and backend foundation.",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -11,7 +11,7 @@
     "start": "next start",
     "dev:api": "tsx src/server.ts",
     "build:api": "tsc -p tsconfig.backend.json",
-    "start:api": "node dist/server.js",
+    "start:api": "node dist/src/server.js",
     "lint": "next lint",
     "lint:api": "tsc -p tsconfig.backend.json --noEmit",
     "test": "node scripts/static-check.mjs",
