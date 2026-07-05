@@ -2,7 +2,7 @@ import { Router } from "express";
 import { authenticate } from "../middleware/authenticate";
 import { authLimiter } from "../middleware/rate-limit";
 import { validateRequest } from "../middleware/validate-request";
-import { loginSchema, refreshTokenSchema, registerSchema } from "../validators/auth.validators";
+import { googleLoginSchema, loginSchema, otpRequestSchema, otpVerifySchema, refreshTokenSchema, registerSchema } from "../validators/auth.validators";
 import { asyncHandler } from "../utils/async-handler";
 import { ok } from "../utils/api-response";
 import { authService } from "../services/auth.service";
@@ -30,16 +30,16 @@ router.get("/me", authenticate, asyncHandler(async (req, res) => {
   ok(res, await authService.me(req.user!.id));
 }));
 
-router.post("/google", asyncHandler(async () => {
-  throw new ApiError(501, "NOT_IMPLEMENTED", "auth.googleProviderNotConfigured");
+router.post("/google", authLimiter, validateRequest({ body: googleLoginSchema }), asyncHandler(async (req, res) => {
+  ok(res, await authService.googleLogin(req.body), "auth.loggedIn");
 }));
 
-router.post("/otp/request", authLimiter, asyncHandler(async () => {
-  throw new ApiError(501, "NOT_IMPLEMENTED", "auth.otpProviderNotConfigured");
+router.post("/otp/request", authLimiter, validateRequest({ body: otpRequestSchema }), asyncHandler(async (req, res) => {
+  ok(res, await authService.requestOtp(req.body), "auth.otpRequested");
 }));
 
-router.post("/otp/verify", authLimiter, asyncHandler(async () => {
-  throw new ApiError(501, "NOT_IMPLEMENTED", "auth.otpProviderNotConfigured");
+router.post("/otp/verify", authLimiter, validateRequest({ body: otpVerifySchema }), asyncHandler(async (req, res) => {
+  ok(res, await authService.verifyOtp(req.body), "auth.loggedIn");
 }));
 
 router.post("/2fa/setup", authenticate, asyncHandler(async () => {

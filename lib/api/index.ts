@@ -3,6 +3,9 @@ import { apiRequest } from "./client";
 export const authApi = {
   register: (body: unknown) => apiRequest("/auth/register", { method: "POST", body: JSON.stringify(body) }),
   login: (body: unknown) => apiRequest("/auth/login", { method: "POST", body: JSON.stringify(body) }),
+  google: (body: unknown) => apiRequest("/auth/google", { method: "POST", body: JSON.stringify(body) }),
+  requestOtp: (body: unknown) => apiRequest("/auth/otp/request", { method: "POST", body: JSON.stringify(body) }),
+  verifyOtp: (body: unknown) => apiRequest("/auth/otp/verify", { method: "POST", body: JSON.stringify(body) }),
   me: (token: string) => apiRequest("/auth/me", { token })
 };
 

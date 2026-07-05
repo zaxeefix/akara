@@ -37,3 +37,9 @@ services:
         sync: false
       - key: GOOGLE_MAPS_API_KEY
         sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: OTP_WEBHOOK_URL
+        sync: false
+      - key: OTP_SENDER_NAME
+        value: AkaraConnect

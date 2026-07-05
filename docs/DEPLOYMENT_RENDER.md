@@ -36,11 +36,16 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 GOOGLE_MAPS_API_KEY=
+GOOGLE_CLIENT_ID=
+OTP_WEBHOOK_URL=
+OTP_SENDER_NAME=AkaraConnect
 NODE_ENV=production
 PORT=4000
 ```
 
 Use the Neon pooled connection string for `DATABASE_URL` and the Neon direct connection string for `DIRECT_URL`. Both URLs should include `sslmode=require`.
+
+`GOOGLE_CLIENT_ID` must match Vercel's `NEXT_PUBLIC_GOOGLE_CLIENT_ID`. `OTP_WEBHOOK_URL` must accept a JSON `POST` containing `phone`, `code`, `sender`, and `message`.
 
 `JWT_SECRET` and `JWT_REFRESH_SECRET` must each be at least 32 characters. If Render has these variables set to empty strings, remove them or replace them with generated secrets. Generate safe values locally with:
 

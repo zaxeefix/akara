@@ -19,6 +19,27 @@ export const loginSchema = z.object({
   password: z.string().min(1)
 });
 
+export const googleLoginSchema = z.object({
+  idToken: z.string().min(20),
+  role: publicRegistrationRoleSchema.default("CUSTOMER"),
+  language: z.enum(["en", "ha", "yo", "ig", "tiv"]).default("en")
+});
+
+export const otpPurposeSchema = z.enum(["LOGIN", "PHONE_VERIFICATION", "PASSWORD_RESET"]);
+
+export const otpRequestSchema = z.object({
+  phone: z.string().min(7).max(20),
+  purpose: otpPurposeSchema.default("LOGIN")
+});
+
+export const otpVerifySchema = z.object({
+  phone: z.string().min(7).max(20),
+  code: z.string().regex(/^\d{6}$/),
+  purpose: otpPurposeSchema.default("LOGIN"),
+  role: publicRegistrationRoleSchema.default("CUSTOMER"),
+  language: z.enum(["en", "ha", "yo", "ig", "tiv"]).default("en")
+});
+
 export const refreshTokenSchema = z.object({
   refreshToken: z.string().min(20)
 });

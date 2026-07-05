@@ -90,6 +90,12 @@ enum SecuritySeverity {
   CRITICAL
 }
 
+enum OtpPurpose {
+  LOGIN
+  PHONE_VERIFICATION
+  PASSWORD_RESET
+}
+
 model User {
   id                 String               @id @default(cuid())
   name               String
@@ -116,6 +122,21 @@ model User {
 
   @@index([status])
   @@index([createdAt])
+}
+
+model OtpCode {
+  id         String     @id @default(cuid())
+  phone      String
+  codeHash   String
+  purpose    OtpPurpose @default(LOGIN)
+  attempts   Int        @default(0)
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@index([phone, purpose, consumedAt])
+  @@index([expiresAt])
 }
 
 model CustomerProfile {

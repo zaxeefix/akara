@@ -22,6 +22,7 @@ AKARACONNECT_API_URL=https://your-render-service.onrender.com/api
 NEXTAUTH_URL=https://your-vercel-domain.vercel.app
 NEXTAUTH_SECRET=replace-with-a-long-random-secret
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-oauth-web-client-id
 NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=
 ```
 
@@ -59,7 +60,12 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 GOOGLE_MAPS_API_KEY=
+GOOGLE_CLIENT_ID=your-google-oauth-web-client-id
+OTP_WEBHOOK_URL=https://your-sms-provider-webhook.example/send-otp
+OTP_SENDER_NAME=AkaraConnect
 ```
+
+`NEXT_PUBLIC_GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_ID` must be the same Google OAuth web client ID. `OTP_WEBHOOK_URL` must accept a JSON `POST` containing `phone`, `code`, `sender`, and `message`.
 
 Render runs committed migrations during `npm run build:render`. If a deploy fails on migrations, fix the Neon URLs or database permissions before retrying.
 

@@ -8,7 +8,9 @@ const requiredFiles = [
   "render.yaml",
   "vercel.json",
   "prisma/schema.prisma",
-  "prisma/migrations/20260705203000_initial_schema/migration.sql"
+  "prisma/migrations/migration_lock.toml",
+  "prisma/migrations/20260705203000_initial_schema/migration.sql",
+  "prisma/migrations/20260705214500_add_otp_codes/migration.sql"
 ];
 
 const missingFiles = requiredFiles.filter((file) => !existsSync(join(process.cwd(), file)));
