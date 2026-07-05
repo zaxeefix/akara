@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 
 type LoginRole = "Customer" | "Vendor" | "Admin";
 
-type LoginResponse = {
+type AuthResponse = {
   user: {
     roles: Role[];
   };
@@ -42,7 +42,7 @@ export function LoginForm({ role = "Customer" }: { role?: "Customer" | "Vendor" 
     const password = String(formData.get("password") ?? "");
 
     try {
-      const response = await authApi.login({ identifier, password }) as LoginResponse;
+      const response = await authApi.login({ identifier, password }) as AuthResponse;
       const target = loginTargets[role];
       const hasAllowedRole = response.user.roles.some((userRole) => target.allowedRoles.includes(userRole));
 
@@ -93,14 +93,60 @@ export function LoginForm({ role = "Customer" }: { role?: "Customer" | "Vendor" 
 }
 
 export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const password = String(formData.get("password") ?? "");
+    const role: Role = vendor ? "VENDOR" : "CUSTOMER";
+
+    try {
+      const response = await authApi.register({
+        name,
+        phone: phone || undefined,
+        email: email || undefined,
+        password,
+        role,
+        language: "en"
+      }) as AuthResponse;
+
+      saveSession({
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+        roles: response.user.roles
+      });
+
+      router.push(vendor ? "/vendor/onboarding" : "/profile");
+      router.refresh();
+    } catch (registerError) {
+      const message = registerError instanceof ApiClientError && registerError.status === 409
+        ? "An account already exists with this email or phone."
+        : registerError instanceof ApiClientError && registerError.status === 400
+          ? "Enter a valid name, email or phone, and password."
+          : "Account creation failed. Check that the API is running and try again.";
+      setError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <Card className="mx-auto w-full max-w-2xl">
       <h1 className="text-2xl font-black">{vendor ? "Register vendor business" : "Create customer account"}</h1>
-      <form className="mt-6 grid gap-4 md:grid-cols-2">
-        <Input label="Full name" name="name" />
+      <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
+        <Input label="Full name" name="name" autoComplete="name" required />
         <Input label="Phone" name="phone" />
-        <Input label="Email" name="email" type="email" />
-        <Input label="Password" name="password" type="password" />
+        <Input label="Email" name="email" type="email" autoComplete="email" />
+        <Input label="Password" name="password" type="password" autoComplete="new-password" minLength={8} required />
         {vendor ? (
           <>
             <Input label="Business name" name="businessName" />
@@ -109,7 +155,10 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
             <Input label="Community" name="community" />
           </>
         ) : null}
-        <Button className="md:col-span-2" type="submit">{vendor ? "Submit vendor registration" : "Create account"}</Button>
+        {error ? <p className="rounded-card border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 md:col-span-2" role="alert">{error}</p> : null}
+        <Button className="md:col-span-2" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Creating account..." : vendor ? "Submit vendor registration" : "Create account"}
+        </Button>
       </form>
     </Card>
   );
