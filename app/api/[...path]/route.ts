@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 const BACKEND_API_URL = (
   process.env.AKARACONNECT_API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:4000/api"
+  (process.env.NODE_ENV === "production"
+    ? "https://akara-api-beta.onrender.com/api"
+    : "http://localhost:4000/api")
 ).replace(/\/$/, "");
 
 const hopByHopHeaders = new Set([

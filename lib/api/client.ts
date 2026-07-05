@@ -2,12 +2,7 @@ type ApiOptions = RequestInit & {
   token?: string;
 };
 
-const configuredApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
-
-export const API_URL =
-  typeof window === "undefined"
-    ? configuredApiUrl || "http://localhost:4000/api"
-    : "/api";
+export const API_URL = "/api";
 
 export class ApiClientError extends Error {
   status: number;
@@ -35,7 +30,7 @@ export async function apiRequest<T>(path: string, options: ApiOptions = {}): Pro
   } catch (error) {
     throw new ApiClientError(
       0,
-      `Cannot reach AkaraConnect API at ${API_URL}. Check NEXT_PUBLIC_API_URL, Render service status, and CORS_ORIGIN.`,
+      "Cannot reach AkaraConnect API. Check the frontend deployment, API proxy, and Render service status.",
       error
     );
   }
