@@ -1,13 +1,13 @@
 import { z } from "zod";
 
-const roleSchema = z.enum(["CUSTOMER", "VENDOR", "ADMIN", "SUPER_ADMIN", "RIDER"]);
+const publicRegistrationRoleSchema = z.enum(["CUSTOMER", "VENDOR"]);
 
 export const registerSchema = z.object({
   name: z.string().min(2).max(120),
   email: z.string().email().optional(),
   phone: z.string().min(7).max(20).optional(),
   password: z.string().min(8).max(100),
-  role: roleSchema.default("CUSTOMER"),
+  role: publicRegistrationRoleSchema.default("CUSTOMER"),
   language: z.enum(["en", "ha", "yo", "ig", "tiv"]).default("en")
 }).refine((data) => data.email || data.phone, {
   message: "Email or phone is required",

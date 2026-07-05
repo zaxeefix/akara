@@ -40,6 +40,14 @@ NODE_ENV=production
 PORT=4000
 ```
 
+`JWT_SECRET` and `JWT_REFRESH_SECRET` must each be at least 32 characters. If Render has these variables set to empty strings, remove them or replace them with generated secrets. Generate safe values locally with:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+```
+
+Run it twice and use different values for access and refresh tokens.
+
 ## Neon Database
 
 1. Create a Neon PostgreSQL project.

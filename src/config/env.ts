@@ -1,13 +1,25 @@
 import "dotenv/config";
 import { z } from "zod";
 
+const optionalSecret = z.preprocess(
+  (value) => {
+    if (typeof value !== "string") {
+      return value;
+    }
+
+    const trimmed = value.trim();
+    return trimmed.length === 0 ? undefined : trimmed;
+  },
+  z.string().min(32, "Must contain at least 32 characters. Leave blank only when auth is not enabled.").optional()
+);
+
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().default(4000),
   DATABASE_URL: z.string().optional(),
   DIRECT_URL: z.string().optional(),
-  JWT_SECRET: z.string().min(32).optional(),
-  JWT_REFRESH_SECRET: z.string().min(32).optional(),
+  JWT_SECRET: optionalSecret,
+  JWT_REFRESH_SECRET: optionalSecret,
   ACCESS_TOKEN_EXPIRES_IN: z.string().default("15m"),
   REFRESH_TOKEN_EXPIRES_IN: z.string().default("7d"),
   CORS_ORIGIN: z.string().default("http://localhost:3000"),
