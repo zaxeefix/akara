@@ -59,11 +59,15 @@ export function LoginForm({ role = "Customer" }: { role?: "Customer" | "Vendor" 
       router.push(target.redirectTo);
       router.refresh();
     } catch (loginError) {
-      const message = loginError instanceof ApiClientError && loginError.status === 401
-        ? "Invalid email, phone, or password."
-        : loginError instanceof ApiClientError && loginError.status === 403
-          ? "This account is not active."
-          : "Login failed. Check that the API is running and try again.";
+      const message = loginError instanceof ApiClientError && loginError.status === 0
+        ? loginError.message
+        : loginError instanceof ApiClientError && loginError.status === 401
+          ? "Invalid email, phone, or password."
+          : loginError instanceof ApiClientError && loginError.status === 403
+            ? "This account is not active."
+            : loginError instanceof ApiClientError && loginError.status >= 500
+              ? "The API returned a server error. Confirm the Neon tables exist and Render environment variables are set."
+              : "Login failed. Check the details and try again.";
       setError(message);
     } finally {
       setIsSubmitting(false);
@@ -128,11 +132,15 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
       router.push(vendor ? "/vendor/onboarding" : "/profile");
       router.refresh();
     } catch (registerError) {
-      const message = registerError instanceof ApiClientError && registerError.status === 409
-        ? "An account already exists with this email or phone."
-        : registerError instanceof ApiClientError && registerError.status === 400
-          ? "Enter a valid name, email or phone, and password."
-          : "Account creation failed. Check that the API is running and try again.";
+      const message = registerError instanceof ApiClientError && registerError.status === 0
+        ? registerError.message
+        : registerError instanceof ApiClientError && registerError.status === 409
+          ? "An account already exists with this email or phone."
+          : registerError instanceof ApiClientError && registerError.status === 400
+            ? "Enter a valid name, email or phone, and password."
+            : registerError instanceof ApiClientError && registerError.status >= 500
+              ? "The API returned a server error. Confirm the Neon tables exist and Render environment variables are set."
+              : "Account creation failed. Check the details and try again.";
       setError(message);
     } finally {
       setIsSubmitting(false);

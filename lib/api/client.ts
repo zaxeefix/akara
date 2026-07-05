@@ -2,7 +2,7 @@ type ApiOptions = RequestInit & {
   token?: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
 export class ApiClientError extends Error {
   status: number;
@@ -20,11 +20,20 @@ export async function apiRequest<T>(path: string, options: ApiOptions = {}): Pro
   headers.set("Content-Type", "application/json");
   if (options.token) headers.set("Authorization", `Bearer ${options.token}`);
 
-  const response = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers,
-    cache: "no-store"
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      ...options,
+      headers,
+      cache: "no-store"
+    });
+  } catch (error) {
+    throw new ApiClientError(
+      0,
+      `Cannot reach AkaraConnect API at ${API_URL}. Check NEXT_PUBLIC_API_URL, Render service status, and CORS_ORIGIN.`,
+      error
+    );
+  }
 
   const payload = await response.json().catch(() => null) as { data?: T; error?: { message?: string } } | null;
   if (!response.ok) {
