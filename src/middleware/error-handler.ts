@@ -35,6 +35,13 @@ export const errorHandler = (
   }
 
   const isProduction = process.env.NODE_ENV === "production";
+  console.error("Unhandled API error", {
+    requestId: req.requestId,
+    method: req.method,
+    path: req.originalUrl,
+    error
+  });
+
   res.status(500).json({
     success: false,
     error: {

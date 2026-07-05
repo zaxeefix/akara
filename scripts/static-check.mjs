@@ -5,7 +5,10 @@ const requiredFiles = [
   "package.json",
   "next.config.js",
   "tsconfig.json",
-  "prisma/schema.prisma"
+  "render.yaml",
+  "vercel.json",
+  "prisma/schema.prisma",
+  "prisma/migrations/20260705203000_initial_schema/migration.sql"
 ];
 
 const missingFiles = requiredFiles.filter((file) => !existsSync(join(process.cwd(), file)));

@@ -12,6 +12,8 @@
     "dev:api": "tsx src/server.ts",
     "build:api": "tsc -p tsconfig.backend.json",
     "start:api": "node dist/src/server.js",
+    "build:render": "npx prisma generate && npx prisma migrate deploy && npm run build:api",
+    "build:vercel": "npm run test:static && npm run build",
     "lint": "next lint",
     "lint:api": "tsc -p tsconfig.backend.json --noEmit",
     "test": "node scripts/static-check.mjs",

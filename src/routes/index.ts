@@ -10,6 +10,7 @@ import reviewRoutes from "./review.routes";
 import notificationRoutes from "./notification.routes";
 import adminRoutes from "./admin.routes";
 import searchRoutes from "./search.routes";
+import { prisma } from "../prisma/client";
 import { ok } from "../utils/api-response";
 
 const router = Router();
@@ -20,6 +21,20 @@ router.get("/health", (_req, res) => {
     status: "ok",
     timestamp: new Date().toISOString()
   });
+});
+
+router.get("/ready", async (_req, res, next) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    ok(res, {
+      service: "AkaraConnect API",
+      status: "ready",
+      database: "connected",
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.use("/auth", authRoutes);

@@ -7,10 +7,10 @@ Use a Render Web Service for the Express backend.
 ## Build Command
 
 ```bash
-npm install && npx prisma generate && npm run build:api
+npm install --include=dev && npm run build:render
 ```
 
-The backend TypeScript compiler and backend type definitions are production dependencies so Render can build the API even when development dependencies are omitted.
+This generates Prisma Client, applies committed Prisma migrations, and compiles the Express API.
 
 ## Start Command
 
@@ -40,6 +40,8 @@ NODE_ENV=production
 PORT=4000
 ```
 
+Use the Neon pooled connection string for `DATABASE_URL` and the Neon direct connection string for `DIRECT_URL`. Both URLs should include `sslmode=require`.
+
 `JWT_SECRET` and `JWT_REFRESH_SECRET` must each be at least 32 characters. If Render has these variables set to empty strings, remove them or replace them with generated secrets. Generate safe values locally with:
 
 ```bash
@@ -63,10 +65,17 @@ Generate Prisma client:
 npx prisma generate
 ```
 
-Apply production migrations after they exist:
+Apply committed production migrations:
 
 ```bash
-npx prisma migrate deploy
+npm run prisma:migrate
+```
+
+Check API liveness and database readiness:
+
+```bash
+curl https://your-render-service.onrender.com/api/health
+curl https://your-render-service.onrender.com/api/ready
 ```
 
 Seed development data only:
