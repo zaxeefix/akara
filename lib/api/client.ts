@@ -2,7 +2,12 @@ type ApiOptions = RequestInit & {
   token?: string;
 };
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+const configuredApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
+
+export const API_URL =
+  typeof window === "undefined"
+    ? configuredApiUrl || "http://localhost:4000/api"
+    : "/api";
 
 export class ApiClientError extends Error {
   status: number;

@@ -27,11 +27,14 @@ Set only safe frontend variables and auth runtime values:
 ```bash
 NEXT_PUBLIC_APP_URL=
 NEXT_PUBLIC_API_URL=
+AKARACONNECT_API_URL=
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
 NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=
 NEXTAUTH_URL=
 NEXTAUTH_SECRET=
 ```
+
+`AKARACONNECT_API_URL` is the server-side backend base URL used by the Next.js API proxy, for example `https://akara-api-beta.onrender.com/api`. Keep `NEXT_PUBLIC_API_URL` only when the browser bundle also needs to know the backend URL.
 
 Never expose:
 
