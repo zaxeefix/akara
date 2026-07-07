@@ -1,5 +1,21 @@
 export type Role = "CUSTOMER" | "VENDOR" | "ADMIN" | "SUPER_ADMIN" | "RIDER";
 
+export type FutureRole = "VENDOR_STAFF" | "SUPPORT_MODERATOR";
+
+export type VendorStaffRole = "MANAGER" | "CASHIER" | "KITCHEN_STAFF" | "DELIVERY_ASSISTANT";
+
+export type Permission =
+  | "orders:read"
+  | "orders:update"
+  | "menu:manage"
+  | "business:manage"
+  | "analytics:read"
+  | "wallet:read"
+  | "reviews:moderate"
+  | "vendors:approve"
+  | "users:manage"
+  | "settings:manage";
+
 export type Vendor = {
   id: string;
   businessName: string;

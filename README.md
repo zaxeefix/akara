@@ -1,8 +1,8 @@
-# AkaraConnect Backend
+# AkaraConnect v1.0 Beta
 
 AkaraConnect is an open-source local food marketplace under ZaxeeFix Enterprise. It connects customers with Akara, Pap/Ogi/Akamu, and other local food vendors across Nigeria.
 
-This repository currently contains the Phase 5 frontend foundation and the Phase 4 backend foundation.
+This repository contains the v1.0 beta frontend and backend foundation. AkaraConnect is currently in beta; some features may be improved as pilot vendors are onboarded.
 
 ## Stack
 
@@ -49,6 +49,10 @@ GET /api/health
 ## Documentation
 
 - [API](docs/API.md)
+- [User Roles](docs/USER_ROLES.md)
+- [Vendor Onboarding](docs/VENDOR_ONBOARDING.md)
+- [Payments](docs/PAYMENTS.md)
+- [Future Features](docs/FUTURE_FEATURES.md)
 - [Environment](docs/ENVIRONMENT.md)
 - [Security](docs/SECURITY.md)
 - [Render Deployment](docs/DEPLOYMENT_RENDER.md)
@@ -96,4 +100,3 @@ Do not commit `.env`, `.env.local`, private keys, database URLs, payment secrets
 ## CI/CD
 
 GitHub Actions is configured in `.github/workflows/ci.yml` to install dependencies, run static checks, generate Prisma, lint, and build the frontend and backend. Production secrets must be stored in GitHub secrets.
-"# akara" 

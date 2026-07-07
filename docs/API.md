@@ -108,4 +108,17 @@ GET /api/search/vendors?lat=10.5105&lng=7.4165&radius=5
 
 ## Integration Notes
 
-Frontend requests should use `NEXT_PUBLIC_API_URL`, which should point to the backend `/api` base URL. Authenticated requests should include the bearer access token. Payment verification and webhook trust must always be completed on the backend.
+Production frontend requests use the same-origin Next.js `/api/*` proxy. Vercel should set `AKARACONNECT_API_URL` to the Render backend `/api` base URL. `NEXT_PUBLIC_API_URL` is only needed when intentionally exposing a browser-side backend URL.
+
+Authenticated requests should include the bearer access token. Payment verification and webhook trust must always be completed on the backend.
+
+## Beta Placeholders
+
+The following modules have safe API architecture or UI placeholders but are not full production workflows yet:
+
+- Delivery rider jobs and earnings.
+- Vendor staff management.
+- Wallets, withdrawal requests, and automated settlement.
+- CMS pages, advertisements, and blog management.
+- AI recommendations, fraud scoring, and spam detection.
+- Vendor subscription plan automation.

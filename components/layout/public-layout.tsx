@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { BetaNotice } from "@/components/shared/beta-notice";
 import { LanguageSwitcher } from "@/components/shared/language-switcher";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { SearchBar } from "@/components/ui/search-bar";
@@ -16,6 +17,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-mist text-ink dark:bg-ink dark:text-white">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
+        <BetaNotice />
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center">
           <div className="flex items-center justify-between gap-3">
             <Link href="/" className="flex items-center gap-2" aria-label="AkaraConnect home">

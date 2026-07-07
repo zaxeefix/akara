@@ -2,6 +2,7 @@
 
 ## Included in Beta
 
+- Visible beta notice for public users.
 - Customer marketplace pages.
 - Vendor onboarding and dashboard foundation.
 - Admin beta operations dashboard.
@@ -13,6 +14,8 @@
 - Google Maps-ready location structure.
 - PWA and SEO foundation.
 - Localization foundation for English, Hausa, Yoruba, Igbo, and Tiv.
+- Initial Prisma migrations and Render migration deploy command.
+- Same-origin Vercel API proxy to Render backend.
 
 ## Not Yet Included
 
@@ -22,8 +25,20 @@
 - Full WhatsApp Business API bot.
 - Real USSD integration.
 - Rider production workflow.
+- Vendor staff production workflow.
+- Support moderator production workflow.
+- Wallet withdrawal and automatic settlement.
+- Subscription billing automation.
+- AI-generated recommendations or fraud outputs.
 - Loan or insurance decisioning.
 - Production legal review.
+
+## Beta Readiness Notes
+
+- Vendors should remain approval-gated before selling.
+- Payment secret keys must stay backend-only.
+- Review moderation must keep audit logs and must not silently rewrite genuine customer reviews.
+- Future AI features should remain rule-based or clearly labelled until real models and safety reviews exist.
 
 ## Feedback Collection
 

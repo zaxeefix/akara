@@ -26,6 +26,8 @@ Required variables:
 
 `AKARACONNECT_API_URL` should point to the Render API base URL, for example `https://akara-api-beta.onrender.com/api`. The browser calls the same-origin Next.js `/api/*` proxy, so `NEXT_PUBLIC_API_URL` is no longer required for production.
 
+Do not place Neon database URLs, JWT secrets, Paystack secret keys, Cloudinary secrets, or backend-only provider credentials in Vercel. Vercel should only receive public frontend keys and the server-side Render API base URL used by the Next.js proxy.
+
 ## Backend
 
 Build command:
@@ -71,3 +73,6 @@ npm run prisma:migrate
 - Neon database credentials must not be exposed to frontend code.
 - CORS must allow the production frontend domain only.
 - Health check endpoint must respond at `/api/health`.
+- Readiness endpoint should respond at `/api/ready` before opening beta traffic.
+- Render should run committed Prisma migrations through `npm run build:render`; avoid manual schema changes except for emergency recovery.
+- Keep `main` deployable for beta and introduce a separate dev branch later for larger experimental marketplace changes.
