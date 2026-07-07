@@ -226,7 +226,7 @@ export function LoginForm({ role = "Customer" }: { role?: "Customer" | "Vendor" 
       {notice ? <p className="mt-3 rounded-card border border-green-200 bg-green-50 px-3 py-2 text-sm font-semibold text-green-700" role="status">{notice}</p> : null}
       <div className="mt-4 flex flex-wrap justify-between gap-2 text-sm">
         <Link href="/forgot-password" className="text-primary">Forgot password?</Link>
-        <Link href="/register" className="text-primary">Create account</Link>
+        <Link href={role === "Vendor" ? "/vendor/register" : "/register"} className="text-primary">Create account</Link>
       </div>
     </Card>
   );

@@ -20,7 +20,7 @@ export default function LandingPage() {
             <div className="mt-6 max-w-2xl"><SearchBar /></div>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link href="/nearby"><Button>Use my location</Button></Link>
-              <Link href="/vendor/onboarding"><Button variant="secondary">Become a vendor</Button></Link>
+              <Link href="/vendor/register"><Button variant="secondary">Become a vendor</Button></Link>
             </div>
           </div>
           <Card className="overflow-hidden bg-white/95 p-0 text-ink">
@@ -118,7 +118,7 @@ export default function LandingPage() {
         </div>
         <Card className="grid gap-4 bg-primary text-white md:grid-cols-[1fr_auto] md:items-center">
           <div><h2 className="text-2xl font-black">Grow your food business online</h2><p className="mt-2 text-sky-100">Register, manage menus, receive orders, and track earnings.</p></div>
-          <Link href="/vendor/onboarding"><Button variant="secondary">Start vendor onboarding</Button></Link>
+          <Link href="/vendor/register"><Button variant="secondary">Create vendor account</Button></Link>
         </Card>
       </section>
     </PublicLayout>

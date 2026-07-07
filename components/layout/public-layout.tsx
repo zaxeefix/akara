@@ -10,7 +10,7 @@ const nav = [
   ["Marketplace", "/marketplace"],
   ["Nearby", "/nearby"],
   ["Categories", "/categories/akara"],
-  ["Vendor", "/vendor/onboarding"]
+  ["Vendor", "/vendor/register"]
 ];
 
 export function PublicLayout({ children }: { children: ReactNode }) {
