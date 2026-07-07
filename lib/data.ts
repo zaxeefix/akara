@@ -70,22 +70,22 @@ export const customerOrders: Order[] = [
 ];
 
 export const vendorMetrics: DashboardMetric[] = [
-  { label: "Total orders", value: "1,248", helper: "+12% this month" },
-  { label: "Pending orders", value: "18", helper: "Needs attention" },
-  { label: "Completed orders", value: "1,103", helper: "88% completion" },
-  { label: "Today's earnings", value: "NGN 84,500", helper: "From 42 orders" },
-  { label: "Monthly earnings", value: "NGN 1.8M", helper: "Net estimate" },
-  { label: "Menu items", value: "36", helper: "31 available" },
-  { label: "Customer reviews", value: "4.7", helper: "Average rating" },
-  { label: "Business status", value: "Open", helper: "Approved vendor" }
+  { label: "Total orders", value: "0", helper: "Available after approval" },
+  { label: "Pending orders", value: "0", helper: "No live orders yet" },
+  { label: "Completed orders", value: "0", helper: "Start after onboarding" },
+  { label: "Today's earnings", value: "NGN 0", helper: "Locked until approved" },
+  { label: "Monthly earnings", value: "NGN 0", helper: "No settled sales yet" },
+  { label: "Menu items", value: "0", helper: "Add first food during onboarding" },
+  { label: "Customer reviews", value: "-", helper: "Reviews appear after orders" },
+  { label: "Business status", value: "Onboarding", helper: "Complete setup for admin review" }
 ];
 
 export const vendorBusinessHealth = [
-  ["Verification", "Approved", "Store can receive orders"],
-  ["Menu coverage", "36 items", "31 currently available"],
-  ["Pickup", "Enabled", "Ready for nearby customers"],
-  ["Delivery", "Beta", "Radius and fee configured"],
-  ["Notifications", "Live", "Orders, reviews, payments, and announcements"],
+  ["Verification", "Draft", "Submit business details for admin review"],
+  ["Menu coverage", "Required", "Add your first food item during onboarding"],
+  ["Pickup", "Setup needed", "Choose if customers can pick up orders"],
+  ["Delivery", "Setup needed", "Set radius and delivery fee if available"],
+  ["Notifications", "Ready", "Orders, reviews, payments, and announcements"],
   ["Staff accounts", "Coming soon", "Manager, cashier, kitchen staff, delivery assistant"]
 ];
 

@@ -266,7 +266,7 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
         roles: response.user.roles
       });
 
-      router.push(vendor ? "/vendor/onboarding" : "/profile");
+      router.push(vendor ? "/vendor/dashboard" : "/profile");
       router.refresh();
     } catch (registerError) {
       const message = registerError instanceof ApiClientError && registerError.status === 0
@@ -286,7 +286,12 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
 
   return (
     <Card className="mx-auto w-full max-w-2xl">
-      <h1 className="text-2xl font-black">{vendor ? "Register vendor business" : "Create customer account"}</h1>
+      <h1 className="text-2xl font-black">{vendor ? "Create vendor account" : "Create customer account"}</h1>
+      {vendor ? (
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          After creating your account, you will enter your private vendor dashboard and continue business onboarding from there.
+        </p>
+      ) : null}
       <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
         <Input label="Full name" name="name" autoComplete="name" required />
         <Input label="Phone" name="phone" />
@@ -314,7 +319,7 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
         ) : null}
         {error ? <p className="rounded-card border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 md:col-span-2" role="alert">{error}</p> : null}
         <Button className="md:col-span-2" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating account..." : vendor ? "Submit vendor registration" : "Create account"}
+          {isSubmitting ? "Creating account..." : vendor ? "Create vendor account" : "Create account"}
         </Button>
       </form>
     </Card>
