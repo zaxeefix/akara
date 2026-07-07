@@ -10,6 +10,7 @@ import type { Role } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 
 declare global {
   interface Window {
@@ -246,6 +247,7 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
     const phone = String(formData.get("phone") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const password = String(formData.get("password") ?? "");
+    const language = String(formData.get("language") ?? "en");
     const role: Role = vendor ? "VENDOR" : "CUSTOMER";
 
     try {
@@ -255,7 +257,7 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
         email: email || undefined,
         password,
         role,
-        language: "en"
+        language
       }) as AuthResponse;
 
       saveSession({
@@ -290,6 +292,18 @@ export function RegisterForm({ vendor = false }: { vendor?: boolean }) {
         <Input label="Phone" name="phone" />
         <Input label="Email" name="email" type="email" autoComplete="email" />
         <Input label="Password" name="password" type="password" autoComplete="new-password" minLength={8} required />
+        <Select
+          label="Preferred language"
+          name="language"
+          defaultValue="en"
+          options={[
+            { label: "English", value: "en" },
+            { label: "Hausa", value: "ha" },
+            { label: "Yoruba", value: "yo" },
+            { label: "Igbo", value: "ig" },
+            { label: "Tiv", value: "tiv" }
+          ]}
+        />
         {vendor ? (
           <>
             <Input label="Business name" name="businessName" />

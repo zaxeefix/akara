@@ -80,6 +80,40 @@ export const vendorMetrics: DashboardMetric[] = [
   { label: "Business status", value: "Open", helper: "Approved vendor" }
 ];
 
+export const vendorBusinessHealth = [
+  ["Verification", "Approved", "Store can receive orders"],
+  ["Menu coverage", "36 items", "31 currently available"],
+  ["Pickup", "Enabled", "Ready for nearby customers"],
+  ["Delivery", "Beta", "Radius and fee configured"],
+  ["Notifications", "Live", "Orders, reviews, payments, and announcements"],
+  ["Staff accounts", "Coming soon", "Manager, cashier, kitchen staff, delivery assistant"]
+];
+
+export const vendorAnalyticsCards = [
+  ["Daily sales", "NGN 84,500", "42 orders today"],
+  ["Weekly sales", "NGN 512,900", "Best day: Friday"],
+  ["Monthly sales", "NGN 1.8M", "12% growth"],
+  ["Top food", "Akara Portion", "312 orders"],
+  ["Returning customers", "38%", "Repeat buyers"],
+  ["Revenue growth", "+12%", "Month over month"]
+];
+
+export const vendorWalletCards = [
+  ["Available balance", "NGN 420,800", "Beta ledger preview"],
+  ["Pending settlement", "NGN 91,200", "Awaiting reconciliation"],
+  ["Withdrawal requests", "Coming soon", "Manual review before launch"],
+  ["Automatic settlement", "Future", "Requires provider approval"]
+];
+
+export const customerDashboardCards = [
+  ["Profile", "Manage name, phone, email, language, and saved addresses"],
+  ["Order history", "Track active orders and review past AkaraConnect orders"],
+  ["Favorites", "Save trusted vendors and favorite foods"],
+  ["Wallet", "Coming soon beta placeholder for balances and coupons"],
+  ["Reviews", "Leave honest vendor reviews with moderation safeguards"],
+  ["Notifications", "See order, payment, and vendor updates"]
+];
+
 export const adminMetrics: DashboardMetric[] = [
   { label: "Total customers", value: "284,920", helper: "Across Nigeria" },
   { label: "Total vendors", value: "12,640", helper: "8,912 active" },
@@ -89,4 +123,25 @@ export const adminMetrics: DashboardMetric[] = [
   { label: "Fraud reports", value: "26", helper: "Open cases" },
   { label: "Active vendors", value: "8,912", helper: "Currently live" },
   { label: "Security alerts", value: "7", helper: "Review today" }
+];
+
+export const adminManagementCards = [
+  ["User management", "Customers, vendors, riders, vendor staff, and support team"],
+  ["Vendor management", "Approve, reject, suspend, feature, blacklist, and secure resets"],
+  ["Order management", "Monitor live orders, cancelled orders, refunds, and disputes"],
+  ["Category management", "Add, edit, feature, sort, and retire food categories"],
+  ["Review moderation", "Hide, restore, pin, report, and audit abusive reviews"],
+  ["CMS", "Landing page, hero, FAQs, terms, privacy, ads, blog, and announcements"],
+  ["Analytics", "Revenue, vendors, customers, riders, orders, foods, and locations"],
+  ["Security", "Audit logs, activity logs, protected routes, and risk review"]
+];
+
+export const riderBetaCards = [
+  ["Profile", "Verified rider identity and contact details"],
+  ["Available orders", "Future delivery job queue for nearby pickups"],
+  ["Navigation", "Google Maps handoff for pickup and drop-off"],
+  ["Delivery history", "Completed deliveries and dispute notes"],
+  ["Earnings", "Daily, weekly, and monthly rider earnings"],
+  ["Online toggle", "Future live availability switch"],
+  ["Ratings", "Customer/vendor delivery feedback"]
 ];

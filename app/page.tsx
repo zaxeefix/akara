@@ -94,6 +94,25 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+        <div>
+          <h2 className="text-2xl font-black">Beta platform roles</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {[
+              ["Customers", "Register, search nearby vendors, order, pay, track, review, and save favorites.", "Active"],
+              ["Vendors", "Complete approval-gated onboarding, manage menu, orders, earnings, and reviews.", "Active beta"],
+              ["Super admins", "Approve vendors, moderate reports, monitor payments, analytics, and security logs.", "Active beta"],
+              ["Delivery riders", "Delivery jobs, navigation, history, earnings, online toggle, and ratings.", "Coming soon"],
+              ["Vendor staff", "Manager, cashier, kitchen staff, and delivery assistant permissions.", "Coming soon"],
+              ["Support moderators", "Customer support, reports, comments, reviews, and fraud queues.", "Coming soon"]
+            ].map(([title, body, status]) => (
+              <Card key={title}>
+                <p className="text-xs font-bold uppercase text-primary">{status}</p>
+                <h3 className="mt-2 font-bold">{title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
         <div className="grid gap-4 md:grid-cols-3">
           {["Search vendors", "Place your order", "Pickup or delivery"].map((step) => <Card key={step}><h3 className="font-bold">{step}</h3><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Fast, clear, and mobile-first from discovery to review.</p></Card>)}
         </div>
